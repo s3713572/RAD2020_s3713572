@@ -49,6 +49,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
   gem 'guard'
+  gem 'minitest'
+  gem 'minitest-reporters'
 end
 
 group :development do

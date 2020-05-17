@@ -4,14 +4,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
   end
-
+  # <!--learn web development with rails page 314-->
   test "should get index" do
     get users_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_user_url
+    get signup_path
     assert_response :success
   end
 
@@ -44,5 +44,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to users_url
+  end
+
+  test "email should be present" do
+    @user.email=""
+    assert_not @user.valid?
   end
 end
