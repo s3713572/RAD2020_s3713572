@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        log_in @user
         format.html {
           flash[:success] = 'welcome to the sample app'
           redirect_to @user, notice: 'User was successfully created.'
