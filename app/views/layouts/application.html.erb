@@ -15,6 +15,12 @@
   <!--learn web development with rails page 249-->
   <%= render 'layouts/header' %>
     <div class="container">
+      <!--learn web development with rails page 408-->
+      <%flash.each do |message_type, message|%>
+        <div class="alert alert-<%=message_type%>">
+          <%=message%>
+        </div>
+      <%end%>
       <%= yield %>
       <%= render 'layouts/footer'%>
     </div>
