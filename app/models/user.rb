@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # attr_accessor :name, :email
-  before_save {self.email=email.downcase! }
+  # TODO it lead to nil
+  # before_save {self.email=self.email.downcase! }
   has_many :microposts
   # <!--learn web development with rails page 319-321 -->
   validates :name, presence: true, length: {maximum: 50}
