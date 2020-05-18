@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # attr_accessor :name, :email
   attr_accessor :remember_token
   before_save {self.email= email.downcase }
-  has_many :microposts
+  has_many :microposts, dependent: :destroy
   # <!--learn web development with rails page 319-321 -->
   validates :name, presence: true, length: {maximum: 50}
   VALID_EMAIL_REGEX=/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -33,5 +33,9 @@ class User < ApplicationRecord
 
   def forget
     update_attribute(:remember_digest,nil)
+  end
+
+  def feed
+    microposts
   end
 end
