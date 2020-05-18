@@ -1,8 +1,59 @@
 <%provide(:title,'Sign up')%>
-<%provide(:button_text,'Create my account')%>
-<h1>Sign up</h1>
+<%provide(:button_text,'Sign up')%>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%=render 'form'%>
+    <div class="sign-content">
+      <h1>Sign up</h1>
+      <!--learn web development with rails page 527-->
+      <%=form_for(@user,class:'') do |f|%>
+        <div class="form-horizontal">
+          <%=render 'shared/error_messages',object: f.object%>
+          <div class="form-group">
+            <%=f.label :email,class:'control-label col-sm-2'%>
+            <div class="col-sm-10">
+              <%=f.email_field :email,class:'form-control'%>
+            </div>
+          </div>
+          <div class="form-group">
+            <%=f.label :password,"pass",class:'control-label col-sm-2'%>
+            <div class="col-sm-10">
+              <%=f.password_field :password,class:'form-control'%>
+            </div>
+          </div>
+          <div class="form-group">
+            <%=f.label :password_confirmation,"pass",class:'control-label col-sm-2'%>
+            <div class="col-sm-10">
+              <%=f.password_field :password_confirmation,class:'form-control'%>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%=f.label :mobile,class:'control-label col-sm-2'%>
+            <div class="col-sm-10">
+              <%=f.text_field :mobile,class:'form-control'%>
+            </div>
+          </div>
+
+          <%=f.submit yield(:button_text),class:"btn btn-success btn-lg"%>
+        </div>
+      <%end%>
+      <%=link_to "already a user?", login_path,class:'pull-right'%>
+    </div>
   </div>
 </div>
+
+<!--http://demo.qfpffmp.cn/cssthemes6/thse_1_LogX_Kit/assets/log-form/1/popupsignin.html-->
+<style>
+  body{
+    background-color: gray;
+  }
+    .sign-content{
+      background-color: white;
+      padding: 30px;
+      border-radius: 5px;
+      margin-top: 120px;
+    }
+    h1{
+      padding-bottom:50px;
+    }
+</style>
