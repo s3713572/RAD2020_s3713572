@@ -34,7 +34,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update user" do
-    patch user_url(@user), params: { user: { email: @user.email, name: @user.name } }
+    patch user_url(@user), params: { user: { email: @user.email, name: @user.name, password:"foobar",password_confirmation:"foobar"} }
     assert_redirected_to user_url(@user)
   end
 
@@ -49,5 +49,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "email should be present" do
     @user.email=""
     assert_not @user.valid?
+  end
+
+  test "email addresses should be saved as lower-case" do
+    mixed_case_email="Foo@ExAMPle.CoM"
+    @user.email=mixed_case_email
+    @user.saveassert_equal mixed_case_email.downcase, @user.reload.email
   end
 end

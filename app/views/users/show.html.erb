@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <!--learn web development with rails page 365-->
+  <%=gravatar_for @user%>
   <strong>Name:</strong>
   <%= @user.name %>
 </p>
@@ -12,3 +14,12 @@
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+
+<%provide(:title,@user.name)%>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1><%=gravatar_for@user%><%=@user.name%></h1>
+    </section>
+  </aside>
+</div>
