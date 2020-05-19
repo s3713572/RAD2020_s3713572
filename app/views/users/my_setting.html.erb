@@ -11,16 +11,58 @@
   <div class="col-lg-9 col-md-9 col-sm-9">
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="profile">
-
+          <%=render 'users/show' %>
       </div>
       <div role="tabpanel" class="tab-pane" id="post">
-
+        <div class="panel panel-default">
+          <div class="panel-heading"><%=@user.name %> Recent Posts</div>
+          <div class="panel-body">
+            <%if @user.microposts.any?%>
+              <h3>Microposts (<%=@user.microposts.count%>)</h3>
+              <ol class="microposts">
+                <% @microposts.each do |micropost| %>
+                  <li class="row">
+                    <div class="col-sm-8 post-content"><%=micropost.title %></div>
+                    <div class="col-sm-4"><%=micropost.created_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
+                  </li>
+                <%end %>
+              </ol>
+            <%end%>
+          </div>
+        </div>
       </div>
       <div role="tabpanel" class="tab-pane" id="my-comment">
-
+        <div class="panel panel-default">
+          <div class="panel-heading"><%=@user.name %> Recent Comments</div>
+          <div class="panel-body">
+            <%if @user.comments.any?%>
+              <h3>Comments (<%=@user.comments.count%>)</h3>
+              <ol class="microposts">
+                <% @comments.each do |comment| %>
+                  <li class="row">
+                    <div class="col-sm-8 comment-content"><%=comment.content %></div>
+                    <div class="col-sm-4"><%=comment.created_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
+                  </li>
+                <%end %>
+              </ol>
+            <%end%>
+          </div>
+        </div>
       </div>
       <div role="tabpanel" class="tab-pane" id="comment-to-me">
-
+        <div class="panel panel-default">
+          <div class="panel-heading">Comments to me</div>
+          <div class="panel-body">
+            <% @microposts.each do |micropost| %>
+              <%=micropost.comments.each do |comment| %>
+                <li class="row">
+                  <div class="col-sm-8 comment-content"><%=comment.content %></div>
+                  <div class="col-sm-4"><%=comment.created_at.strftime('%Y-%m-%d %H:%M:%S') %></div>
+                </li>
+              <%end %>
+            <% end %>
+          </div>
+        </div>
       </div>
       <div role="tabpanel" class="tab-pane" id="setting">
         <div class="panel panel-default">
@@ -56,13 +98,52 @@
                 <%end %>
               </div>
               <div role="tabpanel" class="tab-pane" id="set-avatar">
-
+                <%=form_for(@user,url:user_path(@user),class:'form form-horizontal')  do |f|%>
+                  <div class="input-group form-group">
+                    <span class="input-group-addon" id="basic-addon3">Avatar</span>
+                    <%=f.file_field :picture,class:'form-control' %>
+                  </div>
+                  <div>
+                    <%= f.submit 'Submit', class:"btn btn-success" %>
+                  </div>
+                <%end %>
+                <div class="img-wrap">
+                  <%=image_tag @user.picture.url,size:'50x50' if @user.picture.present?%>
+                </div>
               </div>
               <div role="tabpanel" class="tab-pane" id="set-password">
-
+                <%=form_for(@user,url:user_path(@user),class:'form form-horizontal')  do |f|%>
+                  <div class="input-group form-group">
+                    <span class="input-group-addon" >Password</span>
+                    <%=f.password_field :password,class:'form-control' %>
+                  </div>
+                  <div class="input-group form-group">
+                    <span class="input-group-addon" >Password Confirmation</span>
+                    <%=f.password_field :password_confirmation,class:'form-control' %>
+                  </div>
+                  <div>
+                    <%= f.submit 'Submit', class:"btn btn-success" %>
+                  </div>
+                <%end %>
               </div>
               <div role="tabpanel" class="tab-pane" id="set-verification">
+                <%=form_for(@user,url:user_path(@user),class:'form form-horizontal')  do |f|%>
+                  <div class="input-group form-group">
+                    <span class="input-group-addon" >Full Name</span>
+                    <%=f.text_field :fullname,class:'form-control' %>
+                  </div>
+                  <div class="input-group form-group">
+                    <span class="input-group-addon" >Verification</span>
+                    <%=f.file_field :verification,class:'form-control' %>
+                  </div>
+                  <div>
+                    <%= f.submit 'Submit', class:"btn btn-success" %>
+                  </div>
+                <%end %>
+                <div class="img-wrap">
+                  <%=image_tag @user.verification.url,size:'100x100' if @user.verification.present?%>
 
+                </div>
 
               </div>
             </div>
@@ -80,4 +161,7 @@
     color: white;
     min-height:600px;
   }
+    .img-wrap{
+      margin-top: 50px;
+    }
 </style>

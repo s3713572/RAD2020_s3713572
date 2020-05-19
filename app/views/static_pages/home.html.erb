@@ -47,14 +47,14 @@
                   <span><%=micropost.created_at.to_s %></span>
                   <span><%=micropost.topic %></span>
                   <span class="pull-right">
-                  <span>
-                    <i class="fa fa-comment" aria-hidden="true"></i>
-                    <%=micropost.comments.count %>
-                  </span>
                     <span>
-                      <i class="fa fa-eye" aria-hidden="true"></i>
-                      <%= micropost.view_count.to_i %>
+                      <i class="fa fa-comment" aria-hidden="true"></i>
+                      <%=micropost.comments.count %>
                     </span>
+                      <span>
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        <%= micropost.view_count.to_i %>
+                      </span>
                   </span>
                 </div>
               </div>
@@ -71,7 +71,11 @@
       <div class="panel-body row">
         <% @users.each do |user| %>
           <div class="col-sm-3 user-item">
-            <%=image_tag user.picture.url if user.picture.present? %>
+            <% if user.picture.present? %>
+              <%=image_tag user.picture.url, size:'50x50' %>
+            <%else %>
+              <%=gravatar_for user%>
+            <%end %>
             <%= user.name %>
           </div>
         <% end %>

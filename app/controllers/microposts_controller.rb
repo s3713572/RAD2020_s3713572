@@ -11,6 +11,7 @@ class MicropostsController < ApplicationController
   # GET /microposts/1
   # GET /microposts/1.json
   def show
+    @micropost = Micropost.find(params[:id])
   end
 
   # GET /microposts/new
@@ -20,6 +21,7 @@ class MicropostsController < ApplicationController
 
   # GET /microposts/1/edit
   def edit
+    @micropost = Micropost.find(params[:id])
   end
 
   # POST /microposts

@@ -1,0 +1,64 @@
+<div class="row">
+  <h2><%=@micropost.title %></h2>
+  <div>
+    <span class="badge"><%=@micropost.topic %></span>
+    <span class="pull-right">
+      <span>
+        <i class="fa fa-comment" aria-hidden="true"></i>
+        <%=@micropost.comments.count %>
+      </span>
+        <span>
+          <i class="fa fa-eye" aria-hidden="true"></i>
+          <%= @micropost.view_count.to_i %>
+        </span>
+    </span>
+  </div>
+  <div class="row author-info">
+    <div class="col-lg-2">
+      <%=image_tag @micropost.user.picture.url,size:'50x50' if @micropost.user.picture.present? %>
+    </div>
+    <span><%=@micropost.created_at.to_s %></span>
+  </div>
+  <p>
+    <%=@micropost.content %>
+  </p>
+  <%=form_for(Comment.new,url:comments_path(micropost_id: @micropost.id),class:'form')  do |f|%>
+    <div class="input-group form-group">
+      <span class="input-group-addon" id="basic-addon3">Comments</span>
+      <%=f.text_area :content,class:'form-control' %>
+    </div>
+      <%= f.submit 'Submit', class:"btn btn-success" %>
+  <%end %>
+  <h3>
+    <strong >
+      <%= @micropost.comments.count %> Comments
+    </strong>
+  </h3>
+  <ul class="list-group">
+    <%@micropost.comments.each do |comment| %>
+      <li class="list-group-item row">
+        <div class="col-lg-2 col-md-1">
+          <%= image_tag comment.user.picture.url,size:'100x100' if comment.user.picture.present? %>
+        </div>
+        <div class="col-lg-10 col-md-10">
+            <div><%=comment.user.name %></div>
+            <div><%=comment.created_at.to_s %></div>
+
+        </div>
+        <div class="col-lg-12 col-md-12">
+          <%= comment.content %>
+        </div>
+      </li>
+    <% end %>
+
+  </ul>
+</div>
+<style>
+  .author-info{
+    background-color: #c9c9c9;
+    margin: 20px 0;
+  }
+    p{
+      font-size:14px;
+    }
+</style>
