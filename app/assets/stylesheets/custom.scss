@@ -28,30 +28,13 @@ $light-gray:#777;
   }
 }
 
-/*footer*/
-
+///*footer*/
 footer{
-  margin-top:45px;
-  padding-top:5px;
-  border-top:1px solid $gray-medium-light;
-  color:$light-gray;
-  a{
-    color:$gray;
-    &:hover{
-      color:$gray-darker;
-    }
-  }
-  small{
-    float:left;
-  }
-  ul{
-    float:right;
-    list-style:none;
-    li{
-      float:left;
-      margin-left:15px;
-    }
-  }
+  min-height: 60px;
+  line-height: 60px;
+  font-size: 22px;
+  color: white;
+  text-align: center;
 }
 
 @mixin box_sizing{
@@ -205,4 +188,8 @@ footer{
   width:100%;
   background-color: black;
   left: 0px;
+}
+
+a:hover{
+  background:transparent;
 }

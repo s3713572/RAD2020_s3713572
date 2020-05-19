@@ -1,38 +1,18 @@
-<!--learn web development with rails page 234-->
-<%#if logged_in?%>
-<!--  <div class="row">-->
-<!--    <aside class="col-md-4">-->
-<!--      <section class="user_info">-->
-        <%#=render'shared/user_info'%>
-<!--      </section>-->
-<!--      <section class="micropost_form">-->
-        <%#=render 'shared/micropost_form'%>
-<!--      </section>-->
-<!--    </aside>-->
-<!--    <div class="col-md-8">-->
-<!--      <h3>Micropost Feed</h3>-->
-      <%#=render'shared/feed'%>
-<!--    </div>-->
-<!--  </div>-->
-<%#else%>
-<!--  <div class="center jumbotron">-->
-<!--    <h1>Welcome to the Sample App</h1>-->
-<!--    <h2>This is the home page for the<a href="https://www.railstutorial.org/">Ruby on Rails Tutorial</a>sample application.</h2>-->
-    <%#= link_to "Sign up now!",signup_path,class:"btn btn-lg btn-primary"%>
-<!--  </div>-->
-  <%#= link_to image_tag("rails.png",alt:"Rails logo"),'http://rubyonrails.org/'%>
-<%#end%>
-
 <!--https://v3.bootcss.com/components/#btn-groups-->
-
 <div class="row">
   <div class="col-lg-8">
     <div class="row">
       <div class="col-md-6">
         <div class="btn-group" role="group" aria-label="...">
-          <button type="button" class="btn btn-default">Recent Post</button>
-          <button type="button" class="btn btn-default">Selected Post</button>
-          <button type="button" class="btn btn-default">My Setting</button>
+          <button type="button" class="btn btn-default active"  data-toggle="tab">
+            <%=link_to 'Recent Post','#' %>
+          </button>
+          <button type="button" class="btn btn-default"  data-toggle="tab">
+            <%=link_to 'Selected Post','#' %>
+          </button>
+          <button type="button" class="btn btn-default"  data-toggle="tab">
+            <%= link_to 'My Setting','#' %>
+          </button>
         </div>
       </div>
       <div class="col-md-4">
@@ -49,32 +29,66 @@
     </div>
 
     <ul class="list-group">
-      <li class="list-group-item">
-
-      </li>
-      <li class="list-group-item">
-
-      </li>
+      <% @microposts.each do |micropost| %>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-sm-2">
+              <%=image_tag micropost.user.picture.url if micropost.user.picture?%>
+            </div>
+            <div class="col-sm-10 post-content">
+              <span class="news-title">
+                <%= micropost.title %>
+              </span>
+              <div class="bottom-part">
+                <div>
+                  <span><%=micropost.user.name %></span>
+                  <span><%=micropost.created_at.to_s %></span>
+                  <span><%=micropost.topic %></span>
+                  <span class="pull-right">
+                  <span>
+                    <i class="fa fa-comment" aria-hidden="true"></i>
+                    <%=micropost.comments.count %>
+                  </span>
+                    <span>
+                      <i class="fa fa-eye" aria-hidden="true"></i>
+                      <%= micropost.view_count %>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      <%end %>
     </ul>
   </div>
   <div class="col-lg-4">
 <!--    https://v3.bootcss.com/components/#panels-footer-->
     <div class="panel panel-default">
+      <div class="panel-title">Recent Members</div>
+      <div class="panel-body row">
+        <% @users.each do |user| %>
+          <div class="col-sm-3 user-item">
+            <%=image_tag user.picture.url if user.picture.present? %>
+            <%= user.name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-title">Topic</div>
       <div class="panel-body">
         Basic panel example
       </div>
     </div>
     <div class="panel panel-default">
+      <div class="panel-title">Post</div>
       <div class="panel-body">
         Basic panel example
       </div>
     </div>
     <div class="panel panel-default">
-      <div class="panel-body">
-        Basic panel example
-      </div>
-    </div>
-    <div class="panel panel-default">
+      <div class="panel-title">Links</div>
       <div class="panel-body">
         Basic panel example
       </div>
@@ -94,4 +108,55 @@
     body{
       background-color: #bdbbbb;
     }
+    .list-group{
+      margin-top: 30px;
+    }
+    .list-group-item img{
+      height: 50px;
+      width:50px;
+    }
+    .list-group-item{
+      min-height: 100px;
+    }
+    .bottom-part{
+      bottom: 0px;
+      position:absolute;
+      width:90%;
+    }
+    .btn:active{
+      color: orange;
+    }
+    .btn.active{
+      color:orange;
+    }
+    .btn-group .btn-default{
+
+    }
+    .news-title{
+      font-weight:bold;
+      font-size:20px;
+    }
+    .news-title:hover{
+      color:orange;
+    }
+    .user-item{
+      height: 78px;
+      vertical-align: text-bottom;
+    }
+    .panel-title{
+      background: #e0e0e0;
+      padding-left: 12px;
+      border-left: 4px solid orange;
+      margin-top: 6px;
+      font-weight: bold;
+    }
+    .post-content{
+      height:77px;
+    }
 </style>
+
+<script>
+  $('.btn-group button').click(function(){
+      $(this).addClass('active').siblings().removeClass('active')
+  })
+</script>

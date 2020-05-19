@@ -1,11 +1,9 @@
 class StaticPagesController < ApplicationController
   # <!--learn web development with rails page 125-->
   def home
-    # if logged_in?
-    #   @micropost=current_user.microposts.build
-    #   @feed_items=current_user.feed
-    # end
-    @microposts = Micropost.all()
+    @microposts = Micropost.where(created_at:(Time.now-1.month..Time.now))
+                      .order(created_at: :desc)
+    @users = User.order(created_at: :desc).limit(12)
   end
 
   def help
