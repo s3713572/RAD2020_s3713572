@@ -2,4 +2,10 @@
 
 <%= render 'form', micropost: @micropost %>
 
-<%= link_to 'Back', microposts_path %>
+<%= link_to 'Back', root_path,class:'cancel btn btn-danger' %>
+
+<style>
+  .cancel{
+    width:100%
+  }
+</style>
