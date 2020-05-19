@@ -11,8 +11,9 @@ class User < ApplicationRecord
             format: {with: VALID_EMAIL_REGEX},
             uniqueness: {case_sensitive:false}
   has_secure_password
-  validates :password, presence:true, length: {minimum:6},allow_nil:true
+  validates :password, presence:true, length: {minimum:8, maximum: 20},allow_nil:true
   validates :name, presence: true
+  validates :mobile, length: {minimum: 10, maximum: 13}
   mount_uploader :picture,::PictureUploader
 
   def self.digest(string)

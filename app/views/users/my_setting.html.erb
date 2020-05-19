@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-lg-3 col-md-3 col-sm-3">
+    <ul class="nav nav-pills nav-stacked  nav-tabs  setting-pane">
+      <li role="presentation" class="active" ><a href="#profile" data-toggle="tab">My profile</a></li>
+      <li role="presentation" ><a href="#post" data-toggle="tab">My posts</a></li>
+      <li role="presentation" ><a href="#my-comment" data-toggle="tab">My comments</a></li>
+      <li role="presentation" ><a href="#comment-to-me" data-toggle="tab">Comments to me</a></li>
+      <li role="presentation" ><a href="#setting" data-toggle="tab">Setting</a></li>
+    </ul>
+  </div>
+  <div class="col-lg-9 col-md-9 col-sm-9">
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="profile">
+
+      </div>
+      <div role="tabpanel" class="tab-pane" id="post">
+
+      </div>
+      <div role="tabpanel" class="tab-pane" id="my-comment">
+
+      </div>
+      <div role="tabpanel" class="tab-pane" id="comment-to-me">
+
+      </div>
+      <div role="tabpanel" class="tab-pane" id="setting">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <ul class="nav nav-tabs">
+              <li role="presentation" class="active"><a href="#person-info" data-toggle="tab">Person Info</a></li>
+              <li role="presentation"><a href="#set-avatar" data-toggle="tab">Avatar</a></li>
+              <li role="presentation"><a href="#set-password" data-toggle="tab">Password</a></li>
+              <li role="presentation"><a href="#set-verification" data-toggle="tab">Verification</a></li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active " id="person-info">
+                <%=form_for(@user,url:user_path(@user),class:'form form-horizontal')  do |f|%>
+                  <div class="input-group form-group">
+                    <span class="input-group-addon" id="basic-addon3">Username</span>
+                    <%=f.text_field :name,class:'form-control' %>
+                  </div>
+                  <div class="input-group form-group">
+                    <span class="input-group-addon" id="basic-addon3">Email</span>
+                    <%=f.text_field :email,class:'form-control' %>
+                  </div>
+                  <div class="input-group form-group">
+                    <span class="input-group-addon" id="basic-addon3">Mobile</span>
+                    <%=f.text_field :mobile,class:'form-control' %>
+                  </div>
+                  <div class="input-group form-group">
+                    <span class="input-group-addon" id="basic-addon3">Person Introduction</span>
+                    <%=f.text_area :introduction,class:'form-control' %>
+                  </div>
+                  <div>
+                    <%= f.submit 'Submit', class:"btn btn-success" %>
+                  </div>
+                <%end %>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="set-avatar">
+
+              </div>
+              <div role="tabpanel" class="tab-pane" id="set-password">
+
+              </div>
+              <div role="tabpanel" class="tab-pane" id="set-verification">
+
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .setting-pane{
+    background-color:#ececec;
+    color: white;
+    min-height:600px;
+  }
+</style>

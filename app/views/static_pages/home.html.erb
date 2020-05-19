@@ -4,14 +4,14 @@
     <div class="row">
       <div class="col-md-6">
         <div class="btn-group" role="group" aria-label="...">
-          <button type="button" class="btn btn-default <%=params.key?('topics') ? '':'active' %>"  data-toggle="tab">
+          <button type="button" class="btn btn-default <%=params.key?('topics') ? '':'active' %>" >
             <%=link_to 'Recent Post',root_path %>
           </button>
           <button type="button" class="btn btn-default <%=params.key?('topics') ? 'active':'' %>" id="selected-btn" data-toggle="tab">
             <%=link_to 'Selected Post',root_path %>
           </button>
-          <button type="button" class="btn btn-default"  data-toggle="tab">
-            <%= link_to 'My Setting',root_path %>
+          <button type="button" class="btn btn-default" >
+            <%= link_to 'My Setting', my_setting_path %>
           </button>
         </div>
       </div>
@@ -126,9 +126,7 @@
       border: 1px solid gray;
       list-style: none;
     }
-    body{
-      background-color: #bdbbbb;
-    }
+
     .list-group{
       margin-top: 30px;
     }

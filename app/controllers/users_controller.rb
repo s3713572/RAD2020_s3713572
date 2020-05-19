@@ -75,6 +75,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def my_setting
+    @user = current_user
+    @comments = @user.comments
+    @microposts = @user.microposts
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -83,7 +89,7 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email,:password,:password_confirmation)
+      params.require(:user).permit(:name, :email,:password,:password_confirmation,:mobile,:introduction)
     end
 
   def logged_in_user
