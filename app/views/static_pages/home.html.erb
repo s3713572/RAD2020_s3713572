@@ -4,10 +4,10 @@
     <div class="row">
       <div class="col-md-6">
         <div class="btn-group" role="group" aria-label="...">
-          <button type="button" class="btn btn-default active"  data-toggle="tab">
+          <button type="button" class="btn btn-default <%=params.key?('topics') ? '':'active' %>"  data-toggle="tab">
             <%=link_to 'Recent Post',root_path %>
           </button>
-          <button type="button" class="btn btn-default"  data-toggle="tab">
+          <button type="button" class="btn btn-default <%=params.key?('topics') ? 'active':'' %>" id="selected-btn" data-toggle="tab">
             <%=link_to 'Selected Post',root_path %>
           </button>
           <button type="button" class="btn btn-default"  data-toggle="tab">
@@ -24,7 +24,9 @@
         </div>
       </div>
       <div class="col-md-2">
-        <button class="btn btn-success">New Post</button>
+        <button class="btn btn-success">
+          <%=link_to 'New Post', new_micropost_path %>
+        </button>
       </div>
     </div>
 
@@ -79,7 +81,7 @@
       <div class="panel-title">Topic</div>
       <div class="panel-body">
         <%@topics.each do |topic| %>
-          <span class="topic-item">
+          <span class="topic-item <%= 'active' if params['topics'] && params['topics'].include?(topic)%>">
             <%=topic%>
           </span>
         <% end %>
@@ -211,5 +213,15 @@
       }else{
           $(this).addClass('active')
       }
+      selectedPost();
   })
+  $('#selected-btn').click(function(){
+      selectedPost();
+  });
+
+  function selectedPost(){
+      var arr = $('.topic-item.active').map(function(){return $(this).text().trim()}).get();
+      var params = $.param({topics: arr});
+      window.location.href='<%=root_url %>'+'?'+params;
+  }
 </script>

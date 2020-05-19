@@ -3,6 +3,9 @@ class StaticPagesController < ApplicationController
   def home
     @microposts = Micropost.where(created_at:(Time.now-1.month..Time.now))
                       .order(created_at: :desc)
+    if params[:topics].present?
+      @microposts = @microposts.where(topic: params[:topics])
+    end
     @users = User.order(created_at: :desc).limit(12)
     @topics= ['A.I.','V.R.','RMIT','Game','Rails','Go','Web','M.L.','Joke','Reat','Vue','Node','iOS','AWS']
     @top_posts = Micropost.order(view_count: :desc).limit(5)

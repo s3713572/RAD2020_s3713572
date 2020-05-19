@@ -11,7 +11,7 @@ class User < ApplicationRecord
             uniqueness: {case_sensitive:false}
   has_secure_password
   validates :password, presence:true, length: {minimum:6},allow_nil:true
-
+  validates :name, presence: true
   mount_uploader :picture,::PictureUploader
 
   def self.digest(string)
