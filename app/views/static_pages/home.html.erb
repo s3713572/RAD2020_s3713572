@@ -30,7 +30,7 @@
 
     <ul class="list-group">
       <% @microposts.each do |micropost| %>
-        <li class="list-group-item">
+        <li class="list-group-item post-item">
           <div class="row">
             <div class="col-sm-2">
               <%=image_tag micropost.user.picture.url if micropost.user.picture?%>
@@ -78,19 +78,38 @@
     <div class="panel panel-default">
       <div class="panel-title">Topic</div>
       <div class="panel-body">
-        Basic panel example
+        <%@topics.each do |topic| %>
+          <span class="topic-item">
+            <%=topic%>
+          </span>
+        <% end %>
       </div>
     </div>
     <div class="panel panel-default">
       <div class="panel-title">Post</div>
       <div class="panel-body">
-        Basic panel example
+        <ul class="list-group">
+          <% @top_posts.each do |post| %>
+            <li class="top-item list-group-item">
+              <div>
+                <span><%=post.title%></span>
+                <span class="pull-right">
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                  <%= post.view_count.to_i %>
+                </span>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+
       </div>
     </div>
     <div class="panel panel-default">
       <div class="panel-title">Links</div>
       <div class="panel-body">
-        Basic panel example
+        <% @links.each do |k,v| %>
+          <%= link_to k,v,class:'link-item' %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -115,7 +134,7 @@
       height: 50px;
       width:50px;
     }
-    .list-group-item{
+    .post-item{
       min-height: 100px;
     }
     .bottom-part{
@@ -154,10 +173,43 @@
     .post-content{
       height:77px;
     }
+    .topic-item{
+      padding:5px;
+      border-radius: 25px;
+      border: 1px solid black;
+      margin: 10px;
+      line-height: 34px;
+
+    }
+    .topic-item.active{
+      border: 1px solid orange;
+      color: orange;
+    }
+    .top-item{
+      list-style: none;
+      min-height: 15px;
+    }
+    .link-item{
+      padding:5px;
+      border-radius: 25px;
+      border: 1px solid black;
+      margin: 10px;
+      line-height: 34px;
+    }
+    .link-item:hover{
+      background-color: transparent;
+    }
 </style>
 
 <script>
   $('.btn-group button').click(function(){
       $(this).addClass('active').siblings().removeClass('active')
+  })
+  $('.topic-item').click(function(){
+      if($(this).hasClass('active')){
+          $(this).removeClass('active')
+      }else{
+          $(this).addClass('active')
+      }
   })
 </script>
