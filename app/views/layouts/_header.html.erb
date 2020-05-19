@@ -4,16 +4,16 @@
       <%= link_to "News+", root_url, id: "logo"%>
       <nav>
         <ul class="nav navbar-nav">
-          <li  data-toggle="tab" class="active">
+          <li   class="active">
             <%= link_to "Home", root_path,class:'active'%>
           </li>
-          <li class="dropdown"  data-toggle="tab">
+          <li class="dropdown"  >
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">News <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><%=link_to "News", current_user%></li>
             </ul>
           </li>
-          <li  data-toggle="tab">
+          <li  >
             <%= link_to "Alex", help_path%>
           </li>
         </ul>

@@ -43,7 +43,7 @@
               </span>
               <div class="bottom-part">
                 <div>
-                  <span><%=micropost.user.name %></span>
+                  <span><%= link_to micropost.user.name ,user_path(micropost.user) %></span>
                   <span><%=micropost.created_at.to_s %></span>
                   <span><%=micropost.topic %></span>
                   <span class="pull-right">

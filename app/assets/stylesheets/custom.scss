@@ -55,6 +55,7 @@ footer{
 aside{
   section.user_info{
     margin-top:20px;
+    text-align:center;
   }
   section{
        padding:10px;
@@ -64,9 +65,10 @@ aside{
       padding-top:0;
     }
     span{
-      display:block;
+      //display:block;
       margin-bottom:3px;
       line-height:1;
+      padding: 20px;
     }
     h1{
       font-size:1.4em;
@@ -77,10 +79,10 @@ aside{
     }
   }
 }
-.gravatar{
-  float:left;
-  margin-right:10px;
-}
+//.gravatar{
+//  float:left;
+//  margin-right:10px;
+//}
 .gravatar_edit{
   margin-top:15px;
 }
@@ -192,4 +194,7 @@ footer{
 
 a:hover{
   background:transparent;
+}
+.comment-content,.post-content{
+  text-overflow: ellipsis;
 }
