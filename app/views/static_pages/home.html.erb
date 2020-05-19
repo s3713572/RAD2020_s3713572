@@ -5,13 +5,13 @@
       <div class="col-md-6">
         <div class="btn-group" role="group" aria-label="...">
           <button type="button" class="btn btn-default active"  data-toggle="tab">
-            <%=link_to 'Recent Post','#' %>
+            <%=link_to 'Recent Post',root_path %>
           </button>
           <button type="button" class="btn btn-default"  data-toggle="tab">
-            <%=link_to 'Selected Post','#' %>
+            <%=link_to 'Selected Post',root_path %>
           </button>
           <button type="button" class="btn btn-default"  data-toggle="tab">
-            <%= link_to 'My Setting','#' %>
+            <%= link_to 'My Setting',root_path %>
           </button>
         </div>
       </div>
@@ -37,7 +37,7 @@
             </div>
             <div class="col-sm-10 post-content">
               <span class="news-title">
-                <%= micropost.title %>
+                <%=link_to micropost.title, micropost_path(micropost) %>
               </span>
               <div class="bottom-part">
                 <div>
@@ -51,7 +51,7 @@
                   </span>
                     <span>
                       <i class="fa fa-eye" aria-hidden="true"></i>
-                      <%= micropost.view_count %>
+                      <%= micropost.view_count.to_i %>
                     </span>
                   </span>
                 </div>
@@ -136,8 +136,9 @@
       font-weight:bold;
       font-size:20px;
     }
-    .news-title:hover{
-      color:orange;
+    .news-title a:hover{
+      color:orange !important;
+      background-color: transparent;
     }
     .user-item{
       height: 78px;
