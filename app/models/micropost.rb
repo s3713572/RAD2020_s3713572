@@ -6,6 +6,7 @@ class Micropost < ApplicationRecord
   validates :user_id,presence: true
   mount_uploader :picture,::PictureUploader
   validate :picture_size
+  has_many :comments
 
   private
     def picture_size
